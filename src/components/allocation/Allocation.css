@@ -1,0 +1,28 @@
+form.container {
+    border-radius: 0px;
+    width: 50%;
+    padding: 1em;
+}
+.form-control {
+    width: auto !important;
+    margin-bottom: 1em;
+}
+.department-list {
+    margin-bottom: 1em;
+}
+.date-range {
+    display: flex;
+    padding: 0em;
+}
+.date-range .date-to {
+    margin-left: 1em;
+}
+.date-range .form-label {
+    margin-right: 0.4em;
+}
+.empCount {
+}
+
+.btn {
+    margin-bottom: 1em;
+}
