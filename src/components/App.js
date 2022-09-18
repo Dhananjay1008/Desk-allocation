@@ -15,6 +15,7 @@ class App extends React.Component {
         username: "",
         role: "",
         loginsuccess: "",
+        office: ["EON1"],
         response: {
             emp: 253,
             departments: [
@@ -50,8 +51,8 @@ class App extends React.Component {
 
            <div className="topnav">
              <Link to="/">Home</Link>
-             <Link to="/report">Reports</Link>
-             <Link to="/allocation">Allocation</Link>
+             <Link to="/allocation">Manage Allocation</Link>
+             <Link to="/report">View Allocation</Link>
            </div>
            <Routes>
              <Route path='/' element={<Home/>} />

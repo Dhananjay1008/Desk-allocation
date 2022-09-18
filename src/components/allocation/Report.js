@@ -47,16 +47,15 @@ class Report extends React.Component {
                                   })}
                 </Form.Select>
                 <div className="date-range">
-                    <Form.Label>Date from</Form.Label>
-                    <Form.Control type="date" placeholder="" />
-                    <Form.Label className="date-to">Date to</Form.Label>
+                    <Form.Label>Date </Form.Label>
                     <Form.Control type="date" placeholder="" />
                 </div>
                 </>
                 }
                 <Button className="btn" variant="primary" type="submit">
                  View allocation
-                </Button>
+                </Button>:q
+
                 <Form.Label>Employee count</Form.Label>
                 <Form.Control type="name" placeholder="" value={this.state.employees} className="empCount" disabled/>
                 <Form.Label>Allocate seats</Form.Label>

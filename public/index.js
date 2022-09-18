@@ -3113,27 +3113,6 @@
 	var css_248z$4 = ".container {\r\n  text-align: center;\r\n}\r\n.toggle-switch {\r\n  position: relative;\r\n  width: 75px;\r\n  display: inline-block;\r\n  text-align: left;\r\n  top: 8px;\r\n}\r\n.checkbox {\r\n  display: none;\r\n}\r\n.label {\r\n  display: block;\r\n  overflow: hidden;\r\n  cursor: pointer;\r\n  border: 0 solid #bbb;\r\n  border-radius: 20px;\r\n}\r\n.inner {\r\n  display: block;\r\n  width: 200%;\r\n  margin-left: -100%;\r\n  transition: margin 0.3s ease-in 0s;\r\n}\r\n.inner:before,\r\n.inner:after {\r\n  float: left;\r\n  width: 50%;\r\n  height: 36px;\r\n  padding: 0;\r\n  line-height: 36px;\r\n  color: #fff;\r\n  font-weight: bold;\r\n  box-sizing: border-box;\r\n}\r\n.inner:before {\r\n  content: \"YES\";\r\n  padding-left: 10px;\r\n  background-color: #060;\r\n  color: #fff;\r\n}\r\n.inner:after {\r\n  content: \"NO\";\r\n  padding-right: 10px;\r\n  background-color: #bbb;\r\n  color: #fff;\r\n  text-align: right;\r\n}\r\n.switch {\r\n  display: block;\r\n  width: 24px;\r\n  margin: 5px;\r\n  background: #fff;\r\n  position: absolute;\r\n  top: 0;\r\n  bottom: 0;\r\n  right: 40px;\r\n  border: 0 solid #bbb;\r\n  border-radius: 20px;\r\n  transition: all 0.3s ease-in 0s;\r\n}\r\n.checkbox:checked + .label .inner {\r\n  margin-left: 0;\r\n}\r\n.checkbox:checked + .label .switch {\r\n  right: 0px;\r\n}";
 	styleInject(css_248z$4);
 
-	var ToggleSwitch = function ToggleSwitch(_ref) {
-	  var label = _ref.label;
-	  return /*#__PURE__*/React.createElement("div", {
-	    className: "container"
-	  }, label, " ", /*#__PURE__*/React.createElement("div", {
-	    className: "toggle-switch"
-	  }, /*#__PURE__*/React.createElement("input", {
-	    type: "checkbox",
-	    className: "checkbox",
-	    name: label,
-	    id: label
-	  }), /*#__PURE__*/React.createElement("label", {
-	    className: "label",
-	    htmlFor: label
-	  }, /*#__PURE__*/React.createElement("span", {
-	    className: "inner"
-	  }), /*#__PURE__*/React.createElement("span", {
-	    className: "switch"
-	  }))));
-	};
-
 	var Allocation = /*#__PURE__*/function (_React$Component) {
 	  _inherits(Allocation, _React$Component);
 
@@ -3156,7 +3135,8 @@
 	      employees: _this.props.response.response.emp,
 	      seats: Number((_this.props.response.response.emp * 0.65).toFixed(0)),
 	      departmentlist: _this.props.response.response.departments,
-	      subDepartmentlist: _this.props.response.response.subDepartments
+	      subDepartmentlist: _this.props.response.response.subDepartments,
+	      officelist: _this.props.response.office
 	    });
 
 	    return _this;
@@ -3166,6 +3146,7 @@
 	    key: "render",
 	    value: function render() {
 	      console.log("test1:" + JSON.stringify(this.state.role));
+	      var today = new Date();
 	      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Form$1, {
 	        className: "container"
 	      }, /*#__PURE__*/React.createElement(Form$1.Label, null, "Select department"), /*#__PURE__*/React.createElement(Form$1.Select, {
@@ -3175,16 +3156,21 @@
 	        return /*#__PURE__*/React.createElement("option", {
 	          value: value
 	        }, value);
-	      })), this.state.role === "manager" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Form$1.Label, null, "Select sub-department"), /*#__PURE__*/React.createElement(Form$1.Select, {
+	      })), this.state.role === "manager" && /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(Form$1.Label, null, "Select sub-department"), /*#__PURE__*/React.createElement(Form$1.Select, {
 	        className: "department-list",
 	        "aria-label": "Default select example"
 	      }, /*#__PURE__*/React.createElement("option", null, "Select sub-department"), this.state.subDepartmentlist.map(function (value) {
 	        return /*#__PURE__*/React.createElement("option", {
 	          value: value
 	        }, value);
-	      })), /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(ToggleSwitch, {
-	        label: "Custom allocation"
-	      }))), /*#__PURE__*/React.createElement(Form$1.Label, null, "Employee count"), /*#__PURE__*/React.createElement(Form$1.Control, {
+	      }))), /*#__PURE__*/React.createElement(Form$1.Label, null, "Office"), /*#__PURE__*/React.createElement(Form$1.Select, {
+	        className: "department-list",
+	        "aria-label": "Default select example"
+	      }, /*#__PURE__*/React.createElement("option", null, "Select Office"), this.state.officelist.map(function (value) {
+	        return /*#__PURE__*/React.createElement("option", {
+	          value: value
+	        }, value);
+	      })), /*#__PURE__*/React.createElement(Form$1.Label, null, "Employee count"), /*#__PURE__*/React.createElement(Form$1.Control, {
 	        type: "name",
 	        placeholder: "",
 	        value: this.state.employees,
@@ -3194,13 +3180,13 @@
 	        type: "number",
 	        placeholder: "",
 	        value: this.state.seats,
-	        className: "empCount",
-	        disabled: true
+	        className: "empCount"
 	      }), /*#__PURE__*/React.createElement("div", {
 	        className: "date-range"
 	      }, /*#__PURE__*/React.createElement(Form$1.Label, null, "Date from"), /*#__PURE__*/React.createElement(Form$1.Control, {
 	        type: "date",
-	        placeholder: ""
+	        placeholder: "",
+	        minValue: today
 	      }), /*#__PURE__*/React.createElement(Form$1.Label, {
 	        className: "date-to"
 	      }, "Date to"), /*#__PURE__*/React.createElement(Form$1.Control, {
@@ -8047,12 +8033,7 @@
 	        }, value);
 	      })), /*#__PURE__*/React.createElement("div", {
 	        className: "date-range"
-	      }, /*#__PURE__*/React.createElement(Form$1.Label, null, "Date from"), /*#__PURE__*/React.createElement(Form$1.Control, {
-	        type: "date",
-	        placeholder: ""
-	      }), /*#__PURE__*/React.createElement(Form$1.Label, {
-	        className: "date-to"
-	      }, "Date to"), /*#__PURE__*/React.createElement(Form$1.Control, {
+	      }, /*#__PURE__*/React.createElement(Form$1.Label, null, "Date "), /*#__PURE__*/React.createElement(Form$1.Control, {
 	        type: "date",
 	        placeholder: ""
 	      }))), /*#__PURE__*/React.createElement(Button$1, {
@@ -10990,6 +10971,7 @@
 	      username: "",
 	      role: "",
 	      loginsuccess: "",
+	      office: ["EON1"],
 	      response: {
 	        emp: 253,
 	        departments: ["CTO", "FSG", "IWM"],
@@ -11023,10 +11005,10 @@
 	      }, /*#__PURE__*/React.createElement(Link, {
 	        to: "/"
 	      }, "Home"), /*#__PURE__*/React.createElement(Link, {
-	        to: "/report"
-	      }, "Reports"), /*#__PURE__*/React.createElement(Link, {
 	        to: "/allocation"
-	      }, "Allocation")), /*#__PURE__*/React.createElement(Routes, null, /*#__PURE__*/React.createElement(Route, {
+	      }, "Manage Allocation"), /*#__PURE__*/React.createElement(Link, {
+	        to: "/report"
+	      }, "View Allocation")), /*#__PURE__*/React.createElement(Routes, null, /*#__PURE__*/React.createElement(Route, {
 	        path: "/",
 	        element: /*#__PURE__*/React.createElement(Home, null)
 	      }), /*#__PURE__*/React.createElement(Route, {
