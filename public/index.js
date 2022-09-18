@@ -3136,7 +3136,62 @@
 	      seats: Number((_this.props.response.response.emp * 0.65).toFixed(0)),
 	      departmentlist: _this.props.response.response.departments,
 	      subDepartmentlist: _this.props.response.response.subDepartments,
-	      officelist: _this.props.response.office
+	      officelist: _this.props.response.office,
+	      selectedDept: "",
+	      selectedSubDept: "",
+	      selectedOffice: "",
+	      selectedDateFrom: "",
+	      selectedDateTo: ""
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleDeptChange", function (e) {
+	      _this.setState({
+	        selectedDept: e.target.value
+	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleSubDeptChange", function (e) {
+	      _this.setState({
+	        selectedSubDept: e.target.value
+	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleOfficeChange", function (e) {
+	      _this.setState({
+	        selectedOffice: e.target.value
+	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleDateFromChange", function (e) {
+	      _this.setState({
+	        selectedDateFrom: e.target.value
+	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleDateToChange", function (e) {
+	      _this.setState({
+	        selectedDateTo: e.target.value
+	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleSeatsChange", function (e) {
+	      _this.setState({
+	        seats: e.target.value
+	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (e) {
+	      e.preventDefault();
+	      var body = {};
+	      body = {
+	        username: _this.props.response.username,
+	        department_id: _this.state.selectedDept,
+	        sub_department_id: _this.state.selectedSubDept,
+	        from_date: _this.state.selectedDateFrom,
+	        to_date: _this.state.selectedDateTo,
+	        seats: _this.state.seats
+	      };
+	      console.log("request:" + JSON.stringify(body));
 	    });
 
 	    return _this;
@@ -3150,6 +3205,7 @@
 	      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Form$1, {
 	        className: "container"
 	      }, /*#__PURE__*/React.createElement(Form$1.Label, null, "Select department"), /*#__PURE__*/React.createElement(Form$1.Select, {
+	        onChange: this.handleDeptChange,
 	        className: "department-list",
 	        "aria-label": "Default select example"
 	      }, /*#__PURE__*/React.createElement("option", null, "Select Department"), this.state.departmentlist.map(function (value) {
@@ -3157,6 +3213,7 @@
 	          value: value
 	        }, value);
 	      })), this.state.role === "manager" && /*#__PURE__*/React.createElement("span", null, /*#__PURE__*/React.createElement(Form$1.Label, null, "Select sub-department"), /*#__PURE__*/React.createElement(Form$1.Select, {
+	        onChange: this.handleSubDeptChange,
 	        className: "department-list",
 	        "aria-label": "Default select example"
 	      }, /*#__PURE__*/React.createElement("option", null, "Select sub-department"), this.state.subDepartmentlist.map(function (value) {
@@ -3164,6 +3221,7 @@
 	          value: value
 	        }, value);
 	      }))), /*#__PURE__*/React.createElement(Form$1.Label, null, "Office"), /*#__PURE__*/React.createElement(Form$1.Select, {
+	        onChange: this.handleOfficeChange,
 	        className: "department-list",
 	        "aria-label": "Default select example"
 	      }, /*#__PURE__*/React.createElement("option", null, "Select Office"), this.state.officelist.map(function (value) {
@@ -3177,6 +3235,7 @@
 	        className: "empCount",
 	        disabled: true
 	      }), /*#__PURE__*/React.createElement(Form$1.Label, null, "Allocate seats"), /*#__PURE__*/React.createElement(Form$1.Control, {
+	        onChange: this.handleSeatsChange,
 	        type: "number",
 	        placeholder: "",
 	        value: this.state.seats,
@@ -3184,18 +3243,21 @@
 	      }), /*#__PURE__*/React.createElement("div", {
 	        className: "date-range"
 	      }, /*#__PURE__*/React.createElement(Form$1.Label, null, "Date from"), /*#__PURE__*/React.createElement(Form$1.Control, {
+	        onChange: this.handleDateFromChange,
 	        type: "date",
 	        placeholder: "",
 	        minValue: today
 	      }), /*#__PURE__*/React.createElement(Form$1.Label, {
 	        className: "date-to"
 	      }, "Date to"), /*#__PURE__*/React.createElement(Form$1.Control, {
+	        onChange: this.handleDateToChange,
 	        type: "date",
 	        placeholder: ""
 	      })), /*#__PURE__*/React.createElement(Button$1, {
 	        className: "btn",
 	        variant: "primary",
-	        type: "submit"
+	        type: "submit",
+	        onClick: this.handleSubmit
 	      }, "Submit")));
 	    }
 	  }]);
@@ -8040,7 +8102,7 @@
 	        className: "btn",
 	        variant: "primary",
 	        type: "submit"
-	      }, "View allocation"), /*#__PURE__*/React.createElement(Form$1.Label, null, "Employee count"), /*#__PURE__*/React.createElement(Form$1.Control, {
+	      }, "View allocation"), ":q", /*#__PURE__*/React.createElement(Form$1.Label, null, "Employee count"), /*#__PURE__*/React.createElement(Form$1.Control, {
 	        type: "name",
 	        placeholder: "",
 	        value: this.state.employees,
@@ -10890,7 +10952,9 @@
 	        console.log(json);
 	        that.setState({
 	          loginsuccess: true,
-	          role: e.target.urole.value
+	          role: e.target.urole.value,
+	          departments: ["CTO", "FSG", "IWM"],
+	          subDepartments: ["CTO1", "CTO2"]
 	        });
 
 	        if (!response.ok) {
@@ -10976,7 +11040,10 @@
 	        emp: 253,
 	        departments: ["CTO", "FSG", "IWM"],
 	        subDepartments: ["CTO1", "CTO2"]
-	      }
+	      },
+	      homeLinkActive: true,
+	      manageLinkActive: false,
+	      viewLinkActive: false
 	    });
 
 	    _defineProperty(_assertThisInitialized(_this), "handleCallback", function (obj) {
@@ -10988,10 +11055,45 @@
 	        loginsuccess: obj.loginsuccess,
 	        response: {
 	          emp: 200,
-	          departments: ["CTO", "FSG", "IWM"],
-	          subDepartments: ["CTO1", "CTO2", "CTO3"]
+	          departments: obj.departments,
+	          subDepartments: obj.subDepartments
 	        }
 	      });
+	    });
+
+	    _defineProperty(_assertThisInitialized(_this), "handleNavLink", function (e) {
+	      var id = e.target.id;
+
+	      _this.setState({
+	        homeLinkActive: false,
+	        manageLinkActive: false,
+	        viewLinkActive: false
+	      });
+
+	      console.log("test:" + id);
+
+	      switch (id) {
+	        case 'homelink':
+	          _this.setState({
+	            homeLinkActive: true
+	          });
+
+	          break;
+
+	        case 'managelink':
+	          _this.setState({
+	            manageLinkActive: true
+	          });
+
+	          break;
+
+	        case 'viewlink':
+	          _this.setState({
+	            viewLinkActive: true
+	          });
+
+	          break;
+	      }
 	    });
 
 	    return _this;
@@ -11003,11 +11105,20 @@
 	      return /*#__PURE__*/React.createElement("div", null, this.state.loginsuccess ? /*#__PURE__*/React.createElement(BrowserRouter, null, /*#__PURE__*/React.createElement("div", {
 	        className: "topnav"
 	      }, /*#__PURE__*/React.createElement(Link, {
-	        to: "/"
+	        id: "homelink",
+	        className: this.state.homeLinkActive ? 'active' : '',
+	        to: "/",
+	        onClick: this.handleNavLink
 	      }, "Home"), /*#__PURE__*/React.createElement(Link, {
-	        to: "/allocation"
+	        id: "managelink",
+	        className: this.state.manageLinkActive ? 'active' : '',
+	        to: "/allocation",
+	        onClick: this.handleNavLink
 	      }, "Manage Allocation"), /*#__PURE__*/React.createElement(Link, {
-	        to: "/report"
+	        id: "viewlink",
+	        className: this.state.viewLinkActive ? 'active' : '',
+	        to: "/report",
+	        onClick: this.handleNavLink
 	      }, "View Allocation")), /*#__PURE__*/React.createElement(Routes, null, /*#__PURE__*/React.createElement(Route, {
 	        path: "/",
 	        element: /*#__PURE__*/React.createElement(Home, null)

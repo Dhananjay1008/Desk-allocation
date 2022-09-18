@@ -24,7 +24,10 @@ class App extends React.Component {
             subDepartments: [
                 "CTO1","CTO2"
             ]
-        }
+        },
+        homeLinkActive: true,
+        manageLinkActive: false,
+        viewLinkActive: false
    }
    handleCallback = (obj) => {
    console.log("from app"+obj.role);
@@ -34,15 +37,30 @@ class App extends React.Component {
         loginsuccess: obj.loginsuccess,
         response: {
             emp: 200,
-            departments: [
-                "CTO","FSG","IWM"
-            ],
-            subDepartments: [
-                "CTO1","CTO2","CTO3"
-            ]
+            departments: obj.departments,
+            subDepartments: obj.subDepartments
         }
     })
    }
+   handleNavLink = (e) => {
+        const id = e.target.id;
+        this.setState({
+        homeLinkActive: false,
+        manageLinkActive: false,
+        viewLinkActive: false
+        });
+
+        console.log("test:"+id);
+        switch(id) {
+            case 'homelink': this.setState({homeLinkActive: true});
+                            break;
+            case 'managelink': this.setState({manageLinkActive: true});
+                            break;
+            case 'viewlink': this.setState({viewLinkActive: true});
+                            break;
+        }
+   }
+
    render() {
       return (
          <div>
@@ -50,9 +68,9 @@ class App extends React.Component {
          <Router>
 
            <div className="topnav">
-             <Link to="/">Home</Link>
-             <Link to="/allocation">Manage Allocation</Link>
-             <Link to="/report">View Allocation</Link>
+             <Link id="homelink" className={this.state.homeLinkActive ? 'active' : ''} to="/" onClick={this.handleNavLink}>Home</Link>
+             <Link id="managelink" className={this.state.manageLinkActive ? 'active' : ''} to="/allocation" onClick={this.handleNavLink}>Manage Allocation</Link>
+             <Link id="viewlink" className={this.state.viewLinkActive ? 'active' : ''} to="/report" onClick={this.handleNavLink}>View Allocation</Link>
            </div>
            <Routes>
              <Route path='/' element={<Home/>} />

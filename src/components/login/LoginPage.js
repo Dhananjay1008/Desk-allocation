@@ -25,7 +25,13 @@ class LoginPage extends React.Component {
             console.log(json);
             that.setState({
                 loginsuccess: true,
-                role: e.target.urole.value
+                role: e.target.urole.value,
+                departments: [
+                     "CTO","FSG","IWM"
+                 ],
+                subDepartments: [
+                    "CTO1","CTO2"
+                ]
             })
             if (!response.ok) {
               throw new Error("Network response was not ok");
