@@ -63,10 +63,9 @@ class App extends React.Component {
 
    render() {
       return (
-         <div>
+         <div className="container-div">
          {this.state.loginsuccess ?
          <Router>
-
            <div className="topnav">
              <Link id="homelink" className={this.state.homeLinkActive ? 'active' : ''} to="/" onClick={this.handleNavLink}>Home</Link>
              <Link id="managelink" className={this.state.manageLinkActive ? 'active' : ''} to="/allocation" onClick={this.handleNavLink}>Manage Allocation</Link>

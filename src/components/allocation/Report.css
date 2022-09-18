@@ -27,3 +27,11 @@ form.container {
 .btn {
     margin-bottom: 1em;
 }
+.table-header {
+    background: #4a4f4f;
+    color: #f1f1f1;
+    display: flex;
+}
+.table-header p {
+    margin-left: 1em;
+}

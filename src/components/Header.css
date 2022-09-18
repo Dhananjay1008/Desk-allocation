@@ -1,0 +1,11 @@
+.appTitle {
+    background: #d8dee8;
+}
+.title {
+    font-size: 25px;
+    font-family: fantasy;
+}
+i {
+    float: right;
+    margin-top: -30px;
+}

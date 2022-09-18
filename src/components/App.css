@@ -25,3 +25,11 @@
   background-color: #04AA6D;
   color: white;
 }
+body {
+    background-color: #111212 !important;
+    text-align: center;
+    font-family: "Segoe UI";
+}
+.container-div {
+    text-align: center;
+}

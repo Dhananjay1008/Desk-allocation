@@ -67,7 +67,7 @@ console.log("test1:"+JSON.stringify(this.state.role));
       return (
       <div>
              <Form className="container">
-                <Form.Label>Select department</Form.Label>
+                <Form.Label>Select Department</Form.Label>
                 <Form.Select onChange={this.handleDeptChange} className="department-list" aria-label="Default select example">
                   <option>Select Department</option>
                   {this.state.departmentlist.map(value => {
@@ -76,9 +76,9 @@ console.log("test1:"+JSON.stringify(this.state.role));
                 </Form.Select>
                 {this.state.role === "manager" &&
                 <span>
-                <Form.Label>Select sub-department</Form.Label>
+                <Form.Label>Select Sub-department</Form.Label>
                 <Form.Select onChange={this.handleSubDeptChange} className="department-list" aria-label="Default select example">
-                                  <option>Select sub-department</option>
+                                  <option>Select Sub-department</option>
                                   {this.state.subDepartmentlist.map(value => {
                                     return <option value={value}>{value}</option>
                                   })}
